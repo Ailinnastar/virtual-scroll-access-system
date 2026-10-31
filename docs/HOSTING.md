@@ -1,6 +1,10 @@
 # VSAS hosting
 
+[Open the live portfolio demo](https://ailinna-vsas-demo.onrender.com/)
+
 ## Free Render demo
+
+Local development retains the classroom administrator default. Use production mode and a private administrator password for an internet-facing instance.
 
 Use the Deploy link in the README, sign in to Render, and connect only the public portfolio repository. Review the Blueprint before deploying. It selects the free Docker web-service plan and adds no paid disk or database.
 
@@ -26,3 +30,7 @@ Changing VSAS_ADMIN_PASSWORD does not reset an administrator password already st
 - Persistent hosting retains accounts and files after restart; free demo hosting is disposable.
 
 Platform details: https://render.com/docs/free and https://render.com/docs/web-services.
+
+## Verification scope
+
+VSAS is a university prototype. Automated tests are not a production security audit. Inherited disabled acceptance-test placeholders are excluded from passing-feature claims; the README's 61-test count refers specifically to the JavaScript tests.
