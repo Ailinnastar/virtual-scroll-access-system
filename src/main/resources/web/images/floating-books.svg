@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="180" height="550" viewBox="0 0 90 275" shape-rendering="crispEdges" fill="none">
+<g fill="#f3d18c"><path d="M40 8h2v4h4v2h-4v4h-2v-4h-4v-2h4zM73 106h2v3h3v2h-3v3h-2v-3h-3v-2h3zM19 188h2v4h4v2h-4v4h-2v-4h-4v-2h4zM67 254h2v3h3v2h-3v3h-2v-3h-3v-2h3z"/></g>
+<!-- An open spell book, drawn on a two-pixel grid. -->
+<path fill="#10251b" d="M10 43h26v4h6v-4h28v32H46v4H34v-4H10z"/>
+<path fill="#8caa67" d="M12 45h22v4h10v-4h24v28H44v4H36v-4H12z"/>
+<path fill="#f1dbad" d="M16 39h18v4h6v26h-6v-4H16zm26 4h6v-4h16v26H48v4h-6z"/>
+<path stroke="#a18c78" stroke-width="2" d="M20 47h10m-10 6h12m-12 6h8m22-12h10m-10 6h10m-10 6h6"/>
+<path stroke="#bad48b" stroke-width="2" d="M24 89h34m-28 5h22" opacity=".5"/>
+<!-- A floating closed grimoire. -->
+<path fill="#10251b" d="M37 128h32v42H37z"/><path fill="#6e9f9b" d="M39 130h28v38H39z"/>
+<path fill="#e5d2aa" d="M43 163h22v4H43z"/><path fill="#426778" d="M39 130h6v33h-6z"/>
+<path stroke="#ebd69c" stroke-width="2" d="M50 135h11v20H50z"/><path fill="#f1cc81" d="M54 140h3v3h3v3h-3v3h-3v-3h-3v-3h3z"/>
+<path stroke="#a8d2c0" stroke-width="2" d="M40 180h27m-21 5h14" opacity=".5"/>
+<!-- A tiny potion beside a book stack. -->
+<path fill="#8fa669" d="M21 222h32v8H21z"/><path fill="#e6c9a0" d="M25 224h28v4H25z"/>
+<path fill="#af7f90" d="M17 232h32v8H17z"/><path fill="#e6c9a0" d="M21 234h28v4H21z"/>
+<path fill="#c1d5a4" d="M61 211h8v8h4v16H57v-16h4z"/><path fill="#8dbbaf" d="M59 224h12v9H59z"/><path fill="#c49c70" d="M61 208h8v4h-8z"/>
+</svg>

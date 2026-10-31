@@ -1,0 +1,11 @@
+.git
+.gradle
+build
+data
+**/users.db
+**/users.db*.tmp
+.idea
+*.iml
+.DS_Store
+A2.pdf
+docs

@@ -1,0 +1,69 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'jacoco'
+}
+version = '0.1.0-SNAPSHOT'
+repositories { mavenCentral() }
+java { toolchain { languageVersion = JavaLanguageVersion.of(17) } }
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.14.4'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+application { mainClass = 'vsas.Main' }
+run { standardInput = System.in }
+
+// Runtime credentials must never become downloadable application resources.
+processResources {
+    exclude '**/users.db', '**/users.db*.tmp'
+}
+jar {
+    exclude '**/users.db', '**/users.db*.tmp'
+}
+test {
+    useJUnitPlatform()
+    finalizedBy jacocoTestReport
+}
+jacocoTestReport {
+    dependsOn test
+    reports { xml.required = true; html.required = true }
+}
+jacocoTestCoverageVerification {
+    dependsOn test
+    violationRules {
+        rule {
+            limit {
+                counter = 'LINE'
+                value = 'COVEREDRATIO'
+                minimum = 0.7501 // Assignment requires greater than 75%.
+            }
+        }
+    }
+}
+// TODO CI-01: enable the coverage gate in check once real feature tests exist.
+// check.dependsOn jacocoTestCoverageVerification
+
+// Verify UM-03 independently while the other services remain scaffolds.
+tasks.register('userServiceCoverageVerification', JacocoCoverageVerification) {
+    dependsOn test
+    executionData test
+    sourceSets sourceSets.main
+    violationRules {
+        rule {
+            element = 'CLASS'
+            includes = ['vsas.service.UserService']
+            limit {
+                counter = 'LINE'
+                value = 'COVEREDRATIO'
+                minimum = 1.0
+            }
+            limit {
+                counter = 'BRANCH'
+                value = 'COVEREDRATIO'
+                minimum = 0.90
+            }
+        }
+    }
+}
+check.dependsOn userServiceCoverageVerification
+jar { manifest { attributes 'Main-Class': 'vsas.Main' } }

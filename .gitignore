@@ -1,0 +1,13 @@
+.gradle/
+build/
+data/
+# Also protect credentials if VSAS_DATA_DIR is changed to another checkout directory.
+users.db
+users.db*.tmp
+activity.log
+favourites.db
+favourites*.tmp
+*.class
+.DS_Store
+.idea/
+*.iml

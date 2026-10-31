@@ -1,0 +1,16 @@
+services:
+  vsas:
+    build: .
+    image: vsas:local
+    ports:
+      - "127.0.0.1:4082:8080"
+    environment:
+      VSAS_ADMIN_USERNAME: ${VSAS_ADMIN_USERNAME:-admin}
+      VSAS_ADMIN_PASSWORD: ${VSAS_ADMIN_PASSWORD:?Set a private VSAS_ADMIN_PASSWORD of at least 16 characters}
+      VSAS_SECURE_COOKIES: ${VSAS_SECURE_COOKIES:-false}
+    volumes:
+      - vsas-data:/app/data
+    restart: unless-stopped
+
+volumes:
+  vsas-data:

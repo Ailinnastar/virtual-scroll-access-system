@@ -1,0 +1,43 @@
+:root { color-scheme: dark; --ink: #f3f2dc; --muted: #c1c9b7; --accent: #e1e6a4; --line: #ffffff24; }
+* { box-sizing: border-box; }
+body { margin: 0; background: #14291f; color: var(--ink); font: 15px/1.75 Inter, sans-serif; }
+a { color: inherit; text-underline-offset: 5px; }
+a:focus-visible { outline: 3px solid var(--accent); outline-offset: 6px; }
+.site-header, main, footer { width: min(1120px, calc(100% - 64px)); margin-inline: auto; }
+.site-header { display: flex; justify-content: space-between; align-items: center; padding-block: 27px; border-bottom: 1px solid var(--line); gap: 24px; }
+.brand { font: 600 27px 'Cormorant Garamond', Georgia, serif; text-decoration: none; letter-spacing: 2px; color: var(--accent); }
+nav { display: flex; align-items: center; gap: 30px; font-size: 14px; }
+nav a { text-decoration: none; color: var(--muted); }
+nav a:hover, nav a[aria-current] { color: var(--accent); }
+nav a[aria-current] { text-decoration: underline; }
+.nav-login { border: 1px solid var(--line); border-radius: 30px; padding: 8px 19px; }
+.hero { display: grid; grid-template-columns: 1.3fr 1fr; align-items: center; gap: 80px; padding-block: 85px; }
+.eyebrow { font-size: 10px; letter-spacing: 2.5px; font-weight: 700; color: var(--accent); margin: 0 0 20px; }
+h1, h2 { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500; line-height: 1.06; }
+h1 { font-size: clamp(48px, 5.5vw, 76px); margin: 0 0 25px; letter-spacing: -2px; }
+h1 em { color: var(--accent); font-weight: 500; }
+.intro { font-size: 17px; max-width: 470px; color: var(--muted); margin-bottom: 30px; }
+.button { display: inline-flex; align-items: center; justify-content: space-between; gap: 28px; background: var(--accent); color: #1b3022; border-radius: 5px; padding: 14px 23px; text-decoration: none; font-weight: 600; }
+.button:hover { background: #f2f3cb; }
+.quiet { font-size: 12px; color: var(--muted); margin-top: 14px; }
+.library-note { background: radial-gradient(ellipse at top right, #53604466, transparent 70%), #233a2c; border: 1px solid #9da97f55; border-radius: 100px 100px 8px 8px; padding: 36px; box-shadow: 0 24px 60px #07180f55; }
+.ornament { display: block; text-align: center; font-size: 60px; color: var(--accent); margin-bottom: 18px; }
+.library-note .eyebrow { font-size: 9px; }
+h2 { font-size: 40px; margin: 0 0 20px; }
+.library-note p:not(.eyebrow) { color: var(--muted); font-size: 14px; }
+.note-footer { border-top: 1px solid var(--line); margin-top: 25px; padding-top: 18px; font: italic 22px 'Cormorant Garamond', Georgia, serif; color: var(--accent); }
+.guest-guide { border-top: 1px solid var(--line); padding-block: 60px; }
+.section-heading { max-width: 580px; }
+.section-heading > p:last-child { color: var(--muted); }
+.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; padding: 0; list-style: none; margin: 40px 0 0; }
+.steps li { border-top: 1px solid var(--line); padding-top: 22px; }
+.step-number { font: 30px 'Cormorant Garamond', Georgia, serif; color: var(--accent); }
+h3 { font-size: 17px; font-weight: 500; margin: 14px 0 10px; }
+.steps p { color: var(--muted); font-size: 14px; margin: 0; }
+.join { display: flex; align-items: center; gap: 60px; justify-content: space-between; padding: 36px 40px; margin-bottom: 60px; border: 1px solid var(--line); background: #20382b; border-radius: 8px; }
+.join div { max-width: 610px; }
+.join p:last-child { color: var(--muted); margin-bottom: 0; }
+.join .button { flex-shrink: 0; }
+footer { display: flex; align-items: center; justify-content: space-between; gap: 24px; border-top: 1px solid var(--line); padding-block: 26px; color: var(--muted); font-size: 12px; }
+@media (max-width: 850px) { .hero { gap: 35px; padding-block: 55px; } .library-note { padding: 28px; } .join { flex-direction: column; align-items: start; gap: 24px; } .steps { gap: 24px; } }
+@media (max-width: 620px) { .site-header, main, footer { width: calc(100% - 36px); } .site-header { flex-direction: column; gap: 18px; } nav { gap: 20px; } .hero { grid-template-columns: 1fr; } .steps { grid-template-columns: 1fr; } h2 { font-size: 34px; } .join { padding: 28px; } footer { flex-wrap: wrap; } footer p { width: 100%; order: 1; margin: 0; } }

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>VSAS — Admin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body { margin: 0; background: #798a23; color: #172b19; font: 15px Inter, sans-serif; }
+    main { max-width: 980px; margin: 24px auto; background: #f7fccc; border-radius: 18px; padding: 24px; }
+    h1, h2 { font-family: "Cormorant Garamond", serif; }
+    a { color: #172b19; }
+    table { width: 100%; border-collapse: collapse; margin-bottom: 28px; }
+    th, td { text-align: left; padding: 8px; border-bottom: 1px solid #bad9b4; }
+    form { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-bottom: 28px; }
+    input, select, button { font: inherit; padding: 8px 10px; border-radius: 10px; border: 1px solid #bad9b4; }
+    button { background: #798a23; cursor: pointer; }
+    .status { min-height: 1.4em; }
+  </style>
+<link rel="stylesheet" href="./css/library.css">
+</head>
+<body data-library-page="admin">
+<main>
+  <p><a href="dash.html">Dashboard</a> · <a href="browse.html">Browse Scrolls</a> · <a href="browse.html?favourites=1">Favourites</a> · <a href="activity.html">Activity log</a></p>
+  <h1>Admin</h1>
+  <p class="status" id="status" role="status"></p>
+  <div id="admin-content" hidden inert>
+  <h2>Users</h2>
+  <table id="users"><thead><tr><th>Name</th><th>Username</th><th>ID key</th><th>Type</th><th></th></tr></thead><tbody></tbody></table>
+  <h2>Add user</h2>
+  <p>The next available ID key is assigned automatically.</p>
+  <form id="add-user">
+    <input name="fullName" placeholder="Full name" required>
+    <input name="username" placeholder="Username" required>
+    <input name="email" type="email" placeholder="Email" required>
+    <input name="phone" placeholder="10-digit phone" required>
+    <input name="password" type="password" placeholder="Password" required>
+    <select name="type"><option value="GENERAL">General user</option><option value="ADMIN">Administrator</option></select>
+    <button type="submit">Add user</button>
+  </form>
+  <h2>Account recovery</h2>
+  <p>Verify the account holder’s identity before issuing a link. Share it privately with that person.
+    Links expire after 15 minutes, work once, and become invalid when a replacement is issued or the server restarts.</p>
+  <form id="issue-recovery">
+    <label>Account username <input name="username" autocomplete="off" required></label>
+    <button type="submit">Issue recovery link</button>
+  </form>
+  <div id="recovery-result" hidden>
+    <label for="recovery-link">Private recovery link</label>
+    <textarea id="recovery-link" readonly rows="3" style="width:100%;box-sizing:border-box" spellcheck="false"></textarea>
+    <p>Copy this link and send it securely to the verified account holder. It grants access to their account.</p>
+  </div>
+  <h2>Scroll statistics</h2>
+  <p>Deleted scrolls leave the library. Their ID is no longer an active scroll. The counts stay here.</p>
+  <table id="stats"><thead><tr><th>Scroll ID</th><th>Uploads</th><th>Downloads</th><th>Status</th><th></th></tr></thead><tbody></tbody></table>
+  </div>
+</main>
+<script>
+const status = document.getElementById('status');
+const adminContent = document.getElementById('admin-content');
+function setStatus(message, error) {
+  status.textContent = message;
+  status.style.color = error ? '#7a1f1f' : '#172b19';
+}
+async function api(path, options) {
+  const response = await fetch(path, options);
+  const data = await response.json().catch(() => ({}));
+  if (!response.ok) throw new Error(data.error || 'Request failed');
+  return data;
+}
+async function load() {
+  const session = await api('/api/session');
+  if (session.type !== 'ADMIN') throw new Error('Only an administrator can open this page');
+  adminContent.hidden = false;
+  adminContent.inert = false;
+  const users = await api('/api/admin/users');
+  const userBody = document.querySelector('#users tbody');
+  userBody.replaceChildren();
+  for (const user of users.users) {
+    const row = document.createElement('tr');
+    row.innerHTML = `<td></td><td></td><td></td><td></td><td></td>`;
+    row.children[0].textContent = user.fullName;
+    row.children[1].textContent = user.username;
+    row.children[2].textContent = user.idKey;
+    row.children[3].textContent = user.type;
+    if (user.idKey !== session.idKey) {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.textContent = 'Delete user';
+      button.addEventListener('click', async () => {
+        if (!confirm('Delete ' + user.username + '?')) return;
+        await api('/api/admin/users/' + encodeURIComponent(user.idKey), {method: 'DELETE'});
+        setStatus('Deleted ' + user.username);
+        await load();
+      });
+      row.children[4].append(button);
+    }
+    userBody.append(row);
+  }
+  const stats = await api('/api/admin/statistics');
+  const statBody = document.querySelector('#stats tbody');
+  statBody.replaceChildren();
+  for (const rowData of stats.statistics) {
+    const row = document.createElement('tr');
+    row.innerHTML = `<td></td><td></td><td></td><td></td><td></td>`;
+    row.children[0].textContent = rowData.scrollId;
+    row.children[1].textContent = rowData.uploads;
+    row.children[2].textContent = rowData.downloads;
+    row.children[3].textContent = rowData.removed ? 'Removed' : 'In library';
+    if (!rowData.removed) {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.textContent = 'Delete scroll';
+      button.addEventListener('click', async () => {
+        if (!confirm('Delete scroll ' + rowData.scrollId + '?')) return;
+        await api('/api/admin/scrolls/' + encodeURIComponent(rowData.scrollId), {method: 'DELETE'});
+        setStatus('Deleted scroll ' + rowData.scrollId);
+        await load();
+      });
+      row.children[4].append(button);
+    }
+    statBody.append(row);
+  }
+}
+document.getElementById('add-user').addEventListener('submit', async event => {
+  event.preventDefault();
+  const form = event.currentTarget;
+  const values = Object.fromEntries(new FormData(form));
+  try {
+    await api('/api/admin/users', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'},
+      body: new URLSearchParams(values)
+    });
+    form.reset();
+    setStatus('User added');
+    await load();
+  } catch (error) {
+    setStatus(error.message, true);
+  }
+});
+document.getElementById('issue-recovery').addEventListener('submit', async event => {
+  event.preventDefault();
+  const form = event.currentTarget;
+  const button = form.querySelector('button');
+  const result = document.getElementById('recovery-result');
+  const output = document.getElementById('recovery-link');
+  result.hidden = true;
+  output.value = '';
+  button.disabled = true;
+  try {
+    const data = await api('/api/admin/password-recovery', {
+      method: 'POST', headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+      body: new URLSearchParams(new FormData(form))
+    });
+    const link = new URL('forgot-password.html', location.href);
+    link.hash = new URLSearchParams({token: data.token}).toString();
+    output.value = link.href;
+    result.hidden = false;
+    setStatus('Recovery link issued. Share it privately with the verified user.');
+  } catch (error) { setStatus(error.message, true); }
+  finally { button.disabled = false; }
+});
+load().catch(error => {
+  adminContent.hidden = true;
+  adminContent.inert = true;
+  setStatus(error.message, true);
+});
+</script>
+</body>
+</html>

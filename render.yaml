@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: ailinna-vsas-demo
+    runtime: docker
+    plan: free
+    healthCheckPath: /health
+    envVars:
+      - key: VSAS_PRODUCTION
+        value: 'true'
+      - key: VSAS_SECURE_COOKIES
+        value: 'true'
+      - key: VSAS_DATA_DIR
+        value: /app/data
+      - key: VSAS_ADMIN_USERNAME
+        value: admin
+      - key: VSAS_ADMIN_PASSWORD
+        generateValue: true
+      - key: JAVA_TOOL_OPTIONS
+        value: '-Xmx256m'

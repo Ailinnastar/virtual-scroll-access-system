@@ -1,0 +1,276 @@
+/* The shared spellbook theme. Artwork uses a crisp pixel grid, with readable UI text. */
+:root { --night: #132b23; --velvet: #294735; --paper: #f4e7ca; --ink: #293c29; --lilac: #b8d7a0; --gold: #edcf8d; }
+html, body { background: var(--night); }
+body { -webkit-font-smoothing: antialiased; font-family: Inter, sans-serif; }
+body[data-library-page] { background-image: url('../images/pixel-library.svg'); background-size: 640px; }
+body::after {
+  content: ''; position: fixed; right: 20px; top: 110px; width: 150px; height: min(550px, 70vh);
+  background: url('../images/floating-books.svg') center / contain no-repeat;
+  image-rendering: pixelated; pointer-events: none; z-index: 0;
+  animation: levitate 7s ease-in-out infinite;
+}
+@keyframes levitate { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+/* Keep the artwork out of the fixed-width controls on smaller windows. */
+@media (max-width: 1390px) { body::after { display: none; } }
+@media (prefers-reduced-motion: reduce) { body::after { animation: none; } }
+.v1_2, .v1_3, .v1_51, .v1_105, .v1_155, .v1_185, .v1_214 {
+  background: linear-gradient(90deg, #132b23c9, #132b23e6), url('../images/pixel-library.svg') repeat;
+  background-size: auto, 640px;
+}
+.v1_52, .v1_106, .v1_156, .v1_186, .v1_215 {
+  background: #142c24; border-bottom: 2px solid #70875a;
+}
+.v1_58, .v1_112, .v1_162, .v1_192, .v1_221 {
+  background: linear-gradient(#294333, #162d23); border-right: 2px solid #647d50;
+}
+/* Pixel-style frames, parchment surfaces, and forest ink lettering. */
+.v1_59, .v1_114, .v1_165, .v1_194, .v1_226 {
+  background: #425e3d; border: 2px solid #b3cb87; border-radius: 6px;
+  box-shadow: inset 0 0 0 2px #263e2c, 0 3px 0 #0e211a;
+}
+.v1_66, .v1_120, .v1_170, .v1_200, .v1_229 { color: var(--paper); text-shadow: 0 2px #0e211a; }
+.v1_67, .v1_121 { color: #b8c8aa; }
+.v1_77, .v1_68, .v1_71, .v1_74, .v1_230, .v1_172, .v1_174, .v1_176, .v1_179, .v1_183,
+.v24_19, .v24_29, .v24_12 {
+  background: var(--paper); border: 2px solid #bca38a; border-radius: 7px;
+  box-shadow: 4px 4px 0 #0c201899, inset 0 0 0 3px #fff7e259;
+}
+.v24_19, .v24_29 { color: var(--ink); }
+.v24_21, .v24_22, .v24_31, .v24_32, .v24_33, .v24_34, .v24_35, .v24_36,
+.v1_122, .v1_124, .v1_126 { background: #e8ddc6; border: 1px solid #9ca783; border-radius: 5px; }
+.v1_22, .v1_34, .v1_23, .v1_35 { color: var(--ink); }
+.v24_24, .v24_37 { background: #3d603f; border-radius: 5px; box-shadow: 0 4px 0 #213c2b; }
+.v1_31, .v1_49 { color: #fff2d5; }
+.v1_31:hover, .v1_49:hover { background: #527a4c; }
+.v1_32, .v1_50 { color: #3c603d; }
+.v1_18, .v1_33 { background: url('../images/pixel-library.svg') repeat #132b23; background-size: 640px; }
+.v11_40, .v24_27 { opacity: .1; }
+.v24_18, .v24_28 { background: linear-gradient(100deg, #132c2299, #132c22cc); }
+.v11_20, .v11_48 { background-color: #f4e7ca; border: 3px solid #bda480; border-radius: 8px; box-shadow: 6px 6px 0 #0c201866; }
+.auth-home { color: var(--gold); }
+input, textarea, select { accent-color: #65814c; }
+input:focus-visible, textarea:focus-visible, select:focus-visible, a:focus-visible, button:focus-visible, [role='button']:focus-visible {
+  outline: 3px solid #b2cc7d; outline-offset: 3px;
+}
+button, .button { border-radius: 5px !important; }
+button:hover, [role='button']:hover { filter: brightness(1.08); }
+#scroll-library article, #dashboard-scrolls article {
+  background: var(--paper) !important; color: var(--ink) !important; border: 2px solid #bca38a !important;
+  border-radius: 6px !important; box-shadow: 4px 4px 0 #0c201859 !important;
+  overflow-wrap: anywhere;
+}
+#scroll-library h3, #dashboard-scrolls h3 { color: #35482d; }
+#scroll-library pre, #dashboard-scrolls pre { background: #e6dac1; border-left: 3px solid #899e66; padding: 8px; }
+#scroll-library button, #dashboard-scrolls button { box-shadow: 0 2px 0 #1d342455; }
+#scroll-filters label { color: var(--paper) !important; }
+#scroll-filters input { background: #f8efd9 !important; color: var(--ink); border-color: #a0b080 !important; }
+dialog { background: var(--paper) !important; color: var(--ink); border: 3px solid #91a96c !important; border-radius: 7px !important; box-shadow: 8px 8px 0 #0c201866; max-width: calc(100vw - 32px); }
+dialog::backdrop { background: #10261dbc; }
+#status-notice { border-top: 2px solid #91a96c; color: #f4e7ca !important; }
+#guest-auth-links, #admin-link { border: 1px solid #b1c983; background: #2a4732 !important; color: var(--paper) !important; }
+.admin-activity-link, .favourites-link {
+  position: absolute; top: 316px; left: 12px; z-index: 5;
+  width: 166px; height: 38px; padding: 0 16px;
+  display: flex; align-items: center; box-sizing: border-box;
+  border-radius: 18px; color: #fdf9c4; text-decoration: none;
+  font: 14px Inter, sans-serif;
+}
+.favourites-link { top: 268px; }
+.admin-activity-link:hover, .favourites-link:hover, .favourites-link[aria-current] { background: #527a4c; }
+.favourite-toggle {
+  padding: 6px 10px; border: 1px solid #798a23; background: #f8efd9; color: #35482d; cursor: pointer;
+}
+.favourite-toggle[aria-pressed='true'] { background: #edcf8d; border-color: #7c4625; }
+.favourite-toggle:disabled { opacity: .65; cursor: progress; }
+img[data-profile-picture] { border: 2px solid #acc586; }
+/* About becomes the entrance hall of the same enchanted library. */
+body[data-library-page='about'] { color: #f4e7ca; --ink: #f4e7ca; --muted: #b9c9a9; --accent: #edcf8d; --line: #9fb9784d; }
+.library-note { background: #2c4835; border: 2px solid #91a96c; border-radius: 8px; box-shadow: 6px 6px 0 #10251c; }
+.library-note .ornament { color: transparent; height: 120px; background: url('../images/floating-books.svg') center top / 150px auto no-repeat; image-rendering: pixelated; }
+.join { background: #294534; border: 2px solid #849c64; border-radius: 6px; }
+.button { background: #edcf8d; color: #283b28; box-shadow: 3px 3px 0 #0c201877; }
+/* Administrator screens retain readable tables against the night backdrop. */
+body[data-library-page='admin'] main { background: var(--paper); color: var(--ink); border: 2px solid #bca38a; border-radius: 8px; box-shadow: 6px 6px 0 #0c201866; margin-bottom: 70px; }
+body[data-library-page='admin'] th { background: #e0d0bd; color: #35482d; }
+body[data-library-page='admin'] td { border-color: #b8bf9a; }
+body[data-library-page='admin'] button { background: #3d603f; color: #fff2d5; }
+body[data-library-page='admin'] a { color: #43643b; }
+@media (prefers-contrast: more) { body::after { display: none; } }
+
+/* Scroll shelves adapt to card content instead of clipping long titles and previews. */
+#scroll-library, #dashboard-scrolls {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
+  /* Fixed-height shelves must scroll, rather than compressing rows below their cards. */
+  grid-auto-rows: max-content;
+  align-content: start !important;
+  align-items: start;
+  gap: 22px !important;
+  padding: 10px 12px 20px;
+  width: min(940px, calc(100% - 245px)) !important;
+  box-sizing: border-box;
+  scrollbar-color: #849c64 #1e382b;
+}
+#scroll-library article, #dashboard-scrolls article {
+  width: 100% !important; min-width: 0; height: auto; min-height: max-content !important;
+  box-sizing: border-box; padding: 20px 18px !important;
+  display: flex; flex-direction: column; gap: 14px;
+  background: #e9e5cd !important; border-color: #9ba276 !important;
+}
+#scroll-library article > *, #dashboard-scrolls article > * {
+  flex-shrink: 0;
+  min-width: 0;
+}
+#scroll-library h3, #dashboard-scrolls h3 {
+  margin: 0 !important; width: auto; font: 600 20px/1.35 'Cormorant Garamond', Georgia, serif !important;
+  white-space: normal; overflow-wrap: anywhere;
+}
+#scroll-library article > p, #dashboard-scrolls article > p {
+  margin: 0 !important; white-space: pre-line; overflow-wrap: anywhere;
+  line-height: 1.7; color: #4e6041;
+}
+/* Rolled edges frame the complete server-supplied preview (up to five text lines). */
+#scroll-library pre, #dashboard-scrolls pre {
+  position: relative; box-sizing: border-box; width: 100%; min-width: 0;
+  max-height: none !important; overflow: visible !important;
+  white-space: pre-wrap !important; overflow-wrap: anywhere; word-break: normal;
+  margin: 10px 0 !important; padding: 23px 16px !important;
+  color: #4b3c26; font: 13px/1.7 Georgia, serif !important;
+  background: linear-gradient(90deg, #d9bf83, #f8ecc8 12%, #f5e5b9 85%, #ddc28b) !important;
+  border: 1px solid #bea16b !important; border-radius: 3px;
+  box-shadow: inset 0 0 16px #a88a4a20;
+  tab-size: 4;
+}
+#scroll-library pre::before, #scroll-library pre::after,
+#dashboard-scrolls pre::before, #dashboard-scrolls pre::after {
+  content: ''; position: absolute; left: -5px; right: -5px; height: 10px;
+  background: linear-gradient(#e8d29e, #c6a36a 65%, #e8d29e);
+  border: 1px solid #9c7e4d; border-radius: 4px;
+  box-shadow: 2px 2px 0 #63533320; pointer-events: none;
+}
+#scroll-library pre::before, #dashboard-scrolls pre::before { top: -5px; }
+#scroll-library pre::after, #dashboard-scrolls pre::after { bottom: -5px; }
+#scroll-library article > div, #dashboard-scrolls article > div {
+  display: flex; flex-wrap: wrap; gap: 8px !important; margin-top: auto;
+}
+#scroll-library button, #dashboard-scrolls button {
+  white-space: normal; overflow-wrap: anywhere; max-width: 100%; min-height: 34px;
+}
+
+/* Account identity stays readable against every page's dark toolbar. */
+[data-session-name] {
+  color: #f7edcf;
+  text-shadow: 0 1px 1px #0c2018;
+  font-weight: 600;
+  left: auto;
+  right: 96px;
+  width: min(200px, calc(100% - 320px));
+  text-align: right;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.v11_66, .v11_69, .v11_71, .v11_73, .toolbar-avatar {
+  left: auto;
+  right: 24px;
+}
+#admin-link { right: 320px !important; }
+/* Raised, stepped pixel frame for the sidebar's logout action. */
+.v1_65, .v1_119, .v1_169, .v1_199, .v1_228 {
+  top: auto;
+  bottom: 64px;
+  left: 20px;
+  width: 150px;
+  height: 38px;
+  justify-content: center;
+  padding: 0 12px;
+  background: #3d603f;
+  color: #fff1cc;
+  font-weight: 600;
+  border: 2px solid #bbce87;
+  border-radius: 0;
+  box-shadow: 0 -3px 0 -1px #bbce87, 0 3px 0 -1px #bbce87,
+              -3px 0 0 -1px #bbce87, 3px 0 0 -1px #bbce87,
+              3px 6px 0 #0c2018;
+}
+.v1_65:hover, .v1_119:hover, .v1_169:hover, .v1_199:hover, .v1_228:hover {
+  background: #527a4c;
+  color: #fff8e5;
+}
+.v1_65:active, .v1_119:active, .v1_169:active, .v1_199:active, .v1_228:active {
+  transform: translateY(2px);
+}
+
+/* Random parchment dyes; all retain dark ink and crisp pixel-grid scroll edges. */
+pre[data-scroll-tone] { --sheet: #f4dfa8; --fold: #d0ae69; --rim: #8c6d3d; }
+pre[data-scroll-tone='sage'] { --sheet: #deebbf; --fold: #adc183; --rim: #647e46; }
+pre[data-scroll-tone='rose'] { --sheet: #f0d4cf; --fold: #cfaaa3; --rim: #926a66; }
+pre[data-scroll-tone='sky'] { --sheet: #d9e9ec; --fold: #a6c5ce; --rim: #657f8a; }
+pre[data-scroll-tone='lavender'] { --sheet: #e6dcf0; --fold: #beadd1; --rim: #827093; }
+pre[data-scroll-tone='peach'] { --sheet: #f4dec1; --fold: #d4b18b; --rim: #98734e; }
+#scroll-library pre[data-scroll-tone], #dashboard-scrolls pre[data-scroll-tone] {
+  color: #33362c;
+  background: linear-gradient(90deg,
+    var(--fold) 0 4px, var(--sheet) 4px calc(100% - 4px),
+    var(--fold) calc(100% - 4px)) !important;
+  border: 0 !important;
+  border-radius: 0;
+  padding: 26px 18px !important;
+  margin: 14px 4px !important;
+  width: calc(100% - 8px);
+  box-shadow: -3px 0 var(--rim), 3px 0 var(--rim), 6px 6px #18291b20;
+  font: 13px/1.75 ui-monospace, 'Courier New', monospace !important;
+}
+#scroll-library pre[data-scroll-tone]::before, #scroll-library pre[data-scroll-tone]::after,
+#dashboard-scrolls pre[data-scroll-tone]::before, #dashboard-scrolls pre[data-scroll-tone]::after {
+  left: -9px; right: -9px; height: 18px;
+  border: 0; border-radius: 0; box-shadow: none;
+  background: linear-gradient(to bottom,
+    var(--rim) 0 3px, var(--sheet) 3px 6px,
+    var(--fold) 6px 12px, var(--rim) 12px 15px, var(--fold) 15px);
+  clip-path: polygon(6px 0, calc(100% - 6px) 0,
+    calc(100% - 6px) 3px, calc(100% - 3px) 3px,
+    calc(100% - 3px) 6px, 100% 6px, 100% 12px,
+    calc(100% - 3px) 12px, calc(100% - 3px) 15px,
+    calc(100% - 6px) 15px, calc(100% - 6px) 18px,
+    6px 18px, 6px 15px, 3px 15px, 3px 12px,
+    0 12px, 0 6px, 3px 6px, 3px 3px, 6px 3px);
+}
+#scroll-library pre[data-scroll-tone]::before, #dashboard-scrolls pre[data-scroll-tone]::before { top: -8px; }
+#scroll-library pre[data-scroll-tone]::after, #dashboard-scrolls pre[data-scroll-tone]::after { bottom: -8px; }
+
+/* The parchment body unfolds between its pixel-art rollers on hover or focus. */
+#scroll-library pre[data-scroll-tone], #dashboard-scrolls pre[data-scroll-tone] {
+  display: grid;
+  grid-template-rows: 0fr;
+  padding-block: 8px !important;
+  transition: grid-template-rows .35s ease, padding .35s ease;
+}
+.scroll-preview-content {
+  display: block;
+  min-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity .2s ease;
+}
+#scroll-library article:hover pre[data-scroll-tone],
+#scroll-library article:focus-within pre[data-scroll-tone],
+#dashboard-scrolls article:hover pre[data-scroll-tone],
+#dashboard-scrolls article:focus-within pre[data-scroll-tone] {
+  grid-template-rows: 1fr;
+  padding-block: 26px !important;
+}
+.scroll-card:hover .scroll-preview-content,
+.scroll-card:focus-within .scroll-preview-content { opacity: 1; }
+/* Touch screens have no hover; keep previews available. */
+@media (hover: none) {
+  #scroll-library pre[data-scroll-tone], #dashboard-scrolls pre[data-scroll-tone] {
+    grid-template-rows: 1fr;
+    padding-block: 26px !important;
+  }
+  .scroll-preview-content { opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #scroll-library pre[data-scroll-tone], #dashboard-scrolls pre[data-scroll-tone],
+  .scroll-preview-content { transition: none; }
+}

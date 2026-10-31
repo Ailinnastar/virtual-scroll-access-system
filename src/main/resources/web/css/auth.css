@@ -1,0 +1,80 @@
+/* Responsive account pages: background, branding and forms share one layout. */
+html, body { margin: 0; min-height: 100%; background: #172b19; }
+body { color: #233c2b; font: 14px/1.5 Inter, sans-serif; }
+.v1_18, .v1_33 {
+  position: relative; inset: auto; width: 100%; height: auto;
+  min-height: 100vh; min-height: 100dvh;
+  display: grid; grid-template-columns: minmax(240px, 380px) minmax(0, 480px);
+  justify-content: center; align-items: center; gap: clamp(32px, 6vw, 100px);
+  padding: 64px 32px 80px; border-radius: 0; overflow: hidden;
+  background: radial-gradient(ellipse at 20% 20%, #3b583d66, transparent 65%), #172b19;
+  isolation: isolate;
+}
+.v11_40, .v24_27 {
+  inset: 0; width: 100%; height: 100%; opacity: .25;
+  background-position: center; background-size: cover;
+  z-index: -2;
+}
+.v24_18, .v24_28 {
+  inset: 0; width: 100%; height: 100%; z-index: -1;
+  background: linear-gradient(100deg, #10271c66, #10271cdd);
+}
+.v11_20, .v11_48 {
+  position: relative; inset: auto; grid-column: 1; grid-row: 1;
+  width: min(100%, 340px); aspect-ratio: 1; height: auto;
+  justify-self: center; background-size: contain; background-repeat: no-repeat;
+  filter: drop-shadow(0 8px 20px #0003);
+}
+.v24_19, .v24_29 {
+  position: relative; inset: auto; grid-column: 2; grid-row: 1;
+  width: 100%; height: auto; margin: 0; padding: clamp(24px, 4vw, 40px);
+  background: #f7f7eb; border: 1px solid #dce2cb; border-radius: 24px;
+  box-shadow: 0 24px 70px #06160e55; overflow: visible;
+  display: flex; flex-direction: column; gap: 12px;
+}
+.v24_19 > span, .v24_29 > span {
+  position: static; width: auto; height: auto; text-align: left;
+}
+.v1_22, .v1_34 { font: 600 clamp(30px, 3vw, 38px)/1.15 'Cormorant Garamond', Georgia, serif; color: #203d2a; }
+.v1_23, .v1_35 { color: #586951; font-size: 14px; }
+.v24_20, .v24_30 {
+  position: static; width: 100%; height: auto; margin: 12px 0 6px;
+  background: none; display: grid; gap: 12px; overflow: visible;
+}
+.v24_20 > div, .v24_30 > div {
+  position: relative; inset: auto; width: 100%; height: 46px;
+  background: #e9eddc; border: 1px solid #c6d0b9; border-radius: 10px;
+}
+.v24_20 input, .v24_30 input {
+  position: static; width: 100%; height: 100%; min-width: 0;
+  padding: 0 14px; font-size: 14px; border-radius: 10px;
+}
+.v24_20 > .v24_23 {
+  display: flex; align-items: center; justify-content: space-between;
+  background: none; border: 0; height: auto; gap: 12px;
+}
+.v24_23 span { position: static; width: auto; height: auto; font-size: 12px; }
+.v24_24, .v24_37 {
+  position: relative; inset: auto; width: 100%; height: 46px;
+  background: #284b32; border-radius: 10px; margin-top: 6px;
+}
+.v1_31, .v1_49 {
+  position: static; display: flex; align-items: center; justify-content: center;
+  width: 100%; height: 100%; color: #f7f7eb; font: 600 15px Inter, sans-serif;
+  border-radius: inherit;
+}
+.v1_31:hover, .v1_49:hover { background: #365c3f; }
+.v1_32, .v1_50 { font-size: 12px; margin-top: 8px; color: #36543b; text-align: center !important; }
+[role="button"]:focus-visible, a:focus-visible { outline: 3px solid #a5b85e; outline-offset: 4px; }
+/* Keep ornaments at the edges rather than over the resized form. */
+.v7_9, .v7_10, .v7_11, .v7_12, .v7_13, .v7_14, .v7_15,
+.v7_16, .v7_17, .v7_18, .v7_19, .v7_20, .v7_21, .v7_22 { display: none; }
+.auth-home {
+  position: absolute; top: 20px; left: 28px; color: #e4e9b8;
+  text-decoration: none; font-size: 13px;
+}
+@media (max-width: 720px) {
+  .v1_18, .v1_33 { grid-template-columns: minmax(0, 440px); gap: 20px; padding: 64px 20px 80px; }
+  .v11_20, .v11_48 { width: 140px; grid-row: 1; grid-column: 1; }
+  .v24_19, .v24_29 { grid-column: 1; grid-row: 2; padding: 26px; }
+}
